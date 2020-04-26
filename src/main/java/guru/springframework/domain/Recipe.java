@@ -1,6 +1,7 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,12 +15,14 @@ public class Recipe {
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings;
-    private Integer source;
-    private Integer url;
-    private Integer directions;
+    private String source;
+    private String url;
+
+    @Lob
+    private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -35,7 +38,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -77,27 +80,27 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public Integer getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Integer source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public Integer getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(Integer url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public Integer getDirections() {
+    public String getDirections() {
         return directions;
     }
 
-    public void setDirections(Integer directions) {
+    public void setDirections(String directions) {
         this.directions = directions;
     }
 
