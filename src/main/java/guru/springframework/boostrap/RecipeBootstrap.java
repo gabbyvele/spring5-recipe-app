@@ -83,20 +83,20 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure cupsUom = cupsUomOptional.get();
 
         //get Categories
-        Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("Mozambican");
+        Optional<Category> mozambicanCategoryOptional = categoryRepository.findByDescription("Mozambican");
 
-        if (!americanCategoryOptional.isPresent()) {
+        if (!mozambicanCategoryOptional.isPresent()) {
             throw new RuntimeException("Expected Category Not Found");
         }
 
-        Optional<Category> mexicanCategoryOptional = categoryRepository.findByDescription("South African");
+        Optional<Category> southAfricanCategoryOptional = categoryRepository.findByDescription("South African");
 
-        if (!mexicanCategoryOptional.isPresent()) {
+        if (!southAfricanCategoryOptional.isPresent()) {
             throw new RuntimeException("Expected Category Not Found");
         }
 
-        Category americanCategory = americanCategoryOptional.get();
-        Category mexicanCategory = mexicanCategoryOptional.get();
+        Category mozambicanCategory = mozambicanCategoryOptional.get();
+        Category southAfricanCategory = southAfricanCategoryOptional.get();
 
         //Yummy Guac
         Recipe guacRecipe = new Recipe();
@@ -138,8 +138,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.getIngredients().add(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom, guacRecipe));
         guacRecipe.getIngredients().add(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom, guacRecipe));
 
-        guacRecipe.getCategories().add(americanCategory);
-        guacRecipe.getCategories().add(mexicanCategory);
+        guacRecipe.getCategories().add(mozambicanCategory);
+        guacRecipe.getCategories().add(southAfricanCategory);
+
+        guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacRecipe.setSource("Simply Recipes");
 
         //add to return list
         recipes.add(guacRecipe);
@@ -197,8 +200,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.getIngredients().add(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom, tacosRecipe));
         tacosRecipe.getIngredients().add(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom, tacosRecipe));
 
-        tacosRecipe.getCategories().add(americanCategory);
-        tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.getCategories().add(mozambicanCategory);
+        tacosRecipe.getCategories().add(southAfricanCategory);
 
         recipes.add(tacosRecipe);
         return recipes;
