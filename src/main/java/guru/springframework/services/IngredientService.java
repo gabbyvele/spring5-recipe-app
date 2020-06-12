@@ -12,11 +12,11 @@ public interface IngredientService {
 
     Recipe findById(Long id);
 
-    IngredientCommand saveIngredientCommand(IngredientCommand recipeCommand);
-
     IngredientCommand findIngredientCommandById(Long id);
 
     IngredientCommand findRecipeIdAndIngredientId(Long recipeId, Long id);
+
+    IngredientCommand saveIngredientCommand(IngredientCommand recipeCommand);
 
     void deleteById(Long id);
 }
